@@ -1,0 +1,11 @@
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.csprojResolveAssemblyReference.cache
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.FrmPrincipal.resources
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.Properties.Resources.resources
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.csproj.GenerateResource.Cache
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\bin\Debug\DeteccionRostros.exe
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\bin\Debug\DeteccionRostros.pdb
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\bin\Debug\Emgu.CV.xml
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\bin\Debug\Emgu.CV.UI.xml
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\bin\Debug\Emgu.Util.xml
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.exe
+C:\Users\JairFrancesco\Documents\Visual Studio 2015\Projects\AsistenciaRostros\obj\x86\Debug\DeteccionRostros.pdb
