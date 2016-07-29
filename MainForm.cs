@@ -42,6 +42,7 @@ namespace DeteccionRostros
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool primerRostroDetectado = true;
 
+        //Procedimiento para iniciar la lista de asistentes
         private void initListView()
         {
             // Agregar las columnas
@@ -50,12 +51,14 @@ namespace DeteccionRostros
             lvEstudiantes.Columns.Add("Apellidos", 150);
         }
 
+
         private void iniciarTimer() {
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             //timer.Start();
         }
 
+        //Procedimiento para obtener los Modems conectados a la PC y enlazarlos al combobox
         private void cargarModems() {
             GSMcom gsmControl = new GSMcom();
             bindingSourceModems = new BindingSource();
@@ -67,13 +70,11 @@ namespace DeteccionRostros
             cbModems.ValueMember = "Name";
         }
 
+        //Esta función se ejecuta cada 1 segundo y aumenta el contador para verificar que 
+        //ya pasaron 5 minutos para enviar el siguiente SMS
         private void timer_Tick(object sender, EventArgs e)
         {
             ContadorTiempo++;
-            //Esta condicion es necesaria para que el software no envie un sms cada segundo
-            //if (ContadorTiempo >= 300) { //300 segundos = 5 Minutos de espera antes de enviar otro mensaje
-            //    ContadorTiempo = 0;
-            //}
         }
 
 
@@ -111,6 +112,7 @@ namespace DeteccionRostros
             }
         }
 
+        //Evento del boton iniciar seguridad
         private void btnInitSecurity_Click(object sender, EventArgs e)
         {
             //Inicializar la captura de al WebCam
@@ -121,6 +123,14 @@ namespace DeteccionRostros
             btnInitSecurity.Enabled = false;
         }
 
+        //Evento del boton Exportar
+        private void btnExport2Excel_Click(object sender, EventArgs e)
+        {
+            Export2Excel();
+        }
+
+
+        //Evento que se ejecuta al iniciar el programa
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -153,6 +163,7 @@ namespace DeteccionRostros
 
         }
 
+        //Iniciar la captura de la webcam e iniciar la detección de rostros
         private void btnTomarLista_Click(object sender, EventArgs e)
         {
             //Inicializar la captura de al WebCam
@@ -164,6 +175,7 @@ namespace DeteccionRostros
         }
 
 
+        //Evento del boton Guardar para Guardar un rostro junto con su CUI y nombres y apellidos
         private void btnGuardar_Click(object sender, System.EventArgs e)
         {
             try
@@ -217,11 +229,11 @@ namespace DeteccionRostros
         }
 
 
+        //Frame Grabber para la toma de lista de asistentes
         void FrameGrabber(object sender, EventArgs e)
         {
             lblRostrosDetectados.Text = "0";
             NamePersons.Add("");
-
 
             //Obtener el actual Frame del dispositivo de captura
             currentFrame = grabber.QueryFrame().Resize(320, 240, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -310,6 +322,7 @@ namespace DeteccionRostros
             NamePersons.Clear();
         }
 
+        //Frame Grabber para el mini sistema de seguridad con notificación
         void FrameGrabberSecurity(object sender, EventArgs e)
         {
             try
@@ -343,6 +356,10 @@ namespace DeteccionRostros
                         enviarMensaje(txtCelular.Text, cbModems.SelectedValue.ToString());
                         messageSend = true;
                     }
+
+                    //Envia un SMS al detectar algun rostro y espera 5 minutos antes de enviar el
+                    //siguiente SMS en caso detecte algun rostro.
+                    //Es necesario para que no envie SMS a cada segundo
                     if (ContadorTiempo >= 300 && !messageSend)
                     {
                         enviarMensaje(txtCelular.Text, cbModems.SelectedValue.ToString());
@@ -359,6 +376,47 @@ namespace DeteccionRostros
                 MessageBox.Show("No se ha detectado un puerto COM o un Celular");
                 primerRostroDetectado = true;
                 ContadorTiempo = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //Función para exportar ListView a Excel
+        private void Export2Excel()
+        {
+            try
+            {
+                string[] st = new string[lvEstudiantes.Columns.Count];
+                DirectoryInfo di = new DirectoryInfo(@"c:\DeteccionRostros\");
+                if (di.Exists == false)
+                    di.Create();
+                StreamWriter sw = new StreamWriter(@"c:\DeteccionRostros\" + "Asistentes" + ".xls", false);
+                sw.AutoFlush = true;
+                for (int col = 0; col < lvEstudiantes.Columns.Count; col++)
+                {
+                    sw.Write("\t" + lvEstudiantes.Columns[col].Text.ToString());
+                }
+
+                int rowIndex = 1;
+                int row = 0;
+                string st1 = "";
+                for (row = 0; row < lvEstudiantes.Items.Count; row++)
+                {
+                    if (rowIndex <= lvEstudiantes.Items.Count)
+                        rowIndex++;
+                    st1 = "\n";
+                    for (int col = 0; col < lvEstudiantes.Columns.Count; col++)
+                    {
+                        st1 = st1 + "\t" + "'" + lvEstudiantes.Items[row].SubItems[col].Text.ToString();
+                    }
+                    sw.WriteLine(st1);
+                }
+                sw.Close();
+                FileInfo fil = new FileInfo(@"c:\DeteccionRostros\" + "Asistentes" + ".xls");
+                if (fil.Exists == true)
+                    MessageBox.Show("Proceso Completo", "Exportar a Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

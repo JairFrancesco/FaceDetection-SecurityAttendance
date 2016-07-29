@@ -60,6 +60,7 @@
             this.imgBoxFrameGrabberSecurity = new Emgu.CV.UI.ImageBox();
             this.tabLista = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnExport2Excel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCUI)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgBoxEstudianteNuevo)).BeginInit();
@@ -249,6 +250,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnExport2Excel);
             this.groupBox3.Controls.Add(this.lvEstudiantes);
             this.groupBox3.Location = new System.Drawing.Point(7, 309);
             this.groupBox3.Name = "groupBox3";
@@ -261,7 +263,7 @@
             // 
             this.lvEstudiantes.Location = new System.Drawing.Point(7, 20);
             this.lvEstudiantes.Name = "lvEstudiantes";
-            this.lvEstudiantes.Size = new System.Drawing.Size(694, 227);
+            this.lvEstudiantes.Size = new System.Drawing.Size(694, 188);
             this.lvEstudiantes.TabIndex = 0;
             this.lvEstudiantes.UseCompatibleStateImageBehavior = false;
             this.lvEstudiantes.View = System.Windows.Forms.View.Details;
@@ -390,6 +392,16 @@
             this.tabLista.TabIndex = 0;
             this.tabLista.Text = "Tomar Lista";
             // 
+            // btnExport2Excel
+            // 
+            this.btnExport2Excel.Location = new System.Drawing.Point(576, 214);
+            this.btnExport2Excel.Name = "btnExport2Excel";
+            this.btnExport2Excel.Size = new System.Drawing.Size(125, 23);
+            this.btnExport2Excel.TabIndex = 1;
+            this.btnExport2Excel.Text = "Exportar a Excel";
+            this.btnExport2Excel.UseVisualStyleBackColor = true;
+            this.btnExport2Excel.Click += new System.EventHandler(this.btnExport2Excel_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,6 +463,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnInitSecurity;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnExport2Excel;
     }
 }
 

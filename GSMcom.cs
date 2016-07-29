@@ -5,7 +5,6 @@ using System.Management;
 using System.Text;
 
 namespace DeteccionRostros
-
 {
     public class GSMcom
     {
@@ -50,8 +49,6 @@ namespace DeteccionRostros
                     gsmCom.Add(com);
                 }
             }
-
-
             return gsmCom.ToArray();
         }
     }
